@@ -1,8 +1,9 @@
 .container {
   width: 100%;
-  /* height: 100vh; */
-  height: auto;
-  background-color: blue;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  /* background-color: blue; */
   display: flex;
   justify-content: center;
   padding: 30px;

@@ -10,6 +10,13 @@ import windy from "./assets/images/windy.png";
 import snow from "./assets/images/snowy.png";
 import windIcon from "./assets/images/wind.png";
 import humidityIcon from "./assets/images/humidity.png";
+import rainBg from "./assets/images/rain-bg.jpeg";
+import clearBg from "./assets/images/clear-bg.jpg";
+import snowBg from "./assets/images/snow-bg.jpg";
+import sunnyBg from "./assets/images/sunny-bg.jpg";
+import thunderBg from "./assets/images/thunder-bg.jpg";
+import windyBg from "./assets/images/windy-bg.jpg";
+import cloudBg from "./assets/images/cloud-bg.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
@@ -25,8 +32,10 @@ function Home() {
     tempMin: 10,
     tempMax: 13,
     images: "",
+    bgImages: "",
   });
   const [cityName, setCityName] = useState("");
+  const [error, setError] = useState("");
 
   //   useEffect(() => {}, []);
 
@@ -37,20 +46,28 @@ function Home() {
         .get(apiUrl)
         .then((res) => {
           let imagePath = "";
+          let bgImagePath = "";
           if (res.data.weather[0].main == "Sunny") {
             imagePath = sunny;
+            bgImagePath = sunnyBg;
           } else if (res.data.weather[0].main == "Clear") {
             imagePath = clear;
+            bgImagePath = clearBg;
           } else if (res.data.weather[0].main == "Clouds") {
             imagePath = clouds;
+            bgImagePath = cloudBg;
           } else if (res.data.weather[0].main == "Rain") {
             imagePath = rain;
+            bgImagePath = rainBg;
           } else if (res.data.weather[0].main == "Snow") {
             imagePath = snow;
+            bgImagePath = snowBg;
           } else if (res.data.weather[0].main == "Windy") {
             imagePath = windy;
+            bgImagePath = windyBg;
           } else if (res.data.weather[0].main == "Thunderstorm") {
             imagePath = thunder;
+            bgImagePath = thunderBg;
           }
           console.log(res.data);
           setData({
@@ -62,13 +79,23 @@ function Home() {
             tempMax: res.data.main.temp_max,
             tempMin: res.data.main.temp_min,
             images: imagePath,
+            bgImages: bgImagePath,
           });
+          setError("");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          if (err.response.status === 404) {
+            setError("city not found");
+          } else {
+            setError("");
+          }
+
+          console.log(err);
+        });
     }
   };
   return (
-    <div className="container">
+    <div className="container" style={{ background: `url(${data.bgImages})` }}>
       <h1>weather app</h1>
       <div className="weather">
         <div className="search">
@@ -80,6 +107,9 @@ function Home() {
           <button onClick={handlClick}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
+          <div className="error">
+            <p>{error}</p>
+          </div>
         </div>
         <div className="weather-info">
           <div className="city-temp">
