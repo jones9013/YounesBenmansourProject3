@@ -24,20 +24,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./Home-css.css";
 function Home() {
-  const [data, setData] = useState({
-    celcius: 10,
-    name: "London",
-    humidity: 10,
-    speed: 2,
-    tempMin: 10,
-    tempMax: 13,
-    images: "",
-    bgImages: "",
-  });
-  const [cityName, setCityName] = useState("");
+  const [data, setData] = useState({});
+  const [cityName, setCityName] = useState("Toronto");
   const [error, setError] = useState("");
 
-  //   useEffect(() => {}, []);
+  useEffect(() => {
+    handlClick();
+  }, []);
 
   const handlClick = () => {
     if (cityName !== "") {
