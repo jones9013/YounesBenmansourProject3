@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Footer from "./components/Footer";
 
 import sunny from "./assets/images/sunny.png";
 import clouds from "./assets/images/clouds.png";
@@ -23,7 +24,7 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import "./Home-css.css";
-function Home() {
+const Home = () => {
   const [data, setData] = useState({});
   const [cityName, setCityName] = useState("Toronto");
   const [error, setError] = useState("");
@@ -88,49 +89,57 @@ function Home() {
     }
   };
   return (
-    <div className="container" style={{ background: `url(${data.bgImages})` }}>
-      <h1>weather app</h1>
-      <div className="weather">
-        <div className="search">
-          <input
-            type="text"
-            placeholder="Enter the city name"
-            onChange={(e) => setCityName(e.target.value)}
-          />
-          <button onClick={handlClick}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
-          <div className="error">
-            <p>{error}</p>
+    <>
+      <div
+        className="container"
+        style={{ background: `url(${data.bgImages})` }}
+      >
+        <h1>weather app</h1>
+        <div className="weather">
+          <div className="search">
+            <input
+              type="text"
+              placeholder="Enter the city name"
+              onChange={(e) => setCityName(e.target.value)}
+            />
+            <button onClick={handlClick}>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
+            <div className="error">
+              <p>{error}</p>
+            </div>
           </div>
-        </div>
-        <div className="weather-info">
-          <div className="city-temp">
-            <img className="city-temp-icon" src={data.images} alt="" />
-            <h1>{Math.round(data.celcius)}°C</h1>
-            <h2>{data.name}</h2>
-          </div>
-          <div className="details">
-            <div className="col">
-              <img src={humidityIcon} alt="humidity" />
-              <div>
-                <p>{Math.round(data.humidity)}%</p>
-                <p>Humidity</p>
+          <div className="weather-info">
+            <div className="city-temp">
+              <img className="city-temp-icon" src={data.images} alt="" />
+              <h1>{Math.round(data.celcius)}°C</h1>
+              <h2>{data.name}</h2>
+            </div>
+            <div className="details">
+              <div className="col">
+                <img src={humidityIcon} alt="humidity" />
+                <div>
+                  <p>{Math.round(data.humidity)}%</p>
+                  <p>Humidity</p>
+                </div>
               </div>
-            </div>
-            <div className="col">
-              <img src={windIcon} alt="wind" />
-              <p>{Math.round(data.speed)}Km/h</p>
-              <p>Wind</p>
-            </div>
-            <div className="col">
-              <p>Min: {Math.round(data.tempMin)}°C</p>
-              <p>Max: {Math.round(data.tempMax)}°C;</p>
+              <div className="col">
+                <img src={windIcon} alt="wind" />
+                <p>{Math.round(data.speed)}Km/h</p>
+                <p>Wind</p>
+              </div>
+              <div className="col">
+                <p>Min: {Math.round(data.tempMin)}°C</p>
+                <p>Max: {Math.round(data.tempMax)}°C;</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <div className="footer">
+        <Footer />
+      </div>
+    </>
   );
-}
+};
 export default Home;
