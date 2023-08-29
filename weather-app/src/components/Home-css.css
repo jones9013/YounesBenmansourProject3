@@ -4,7 +4,6 @@ body {
 
 * {
   box-sizing: border-box;
-  /* margin: 0; */
 }
 
 .container {
@@ -80,6 +79,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   box-shadow: 5px 5px 5px 2px black;
   background-color: white;
 }
@@ -92,4 +92,31 @@ body {
   background-color: black;
   font-weight: 400;
   letter-spacing: 2px;
+}
+
+@media (max-width: 765px) {
+  .weather {
+    width: 100%;
+  }
+
+  .details {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .col {
+    width: 100%;
+  }
+
+  .search input {
+    width: 245px;
+  }
+
+  .search {
+    flex-direction: column;
+  }
+
+  div.col {
+    margin-bottom: 20px;
+  }
 }
