@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "./Footer";
+const apiKey = "9be6ef8235949b17a36522f359a10979";
 
 import sunny from "../assets/images/sunny.png";
 import clouds from "../assets/images/clouds.png";
@@ -37,7 +38,7 @@ const Home = () => {
 
   const handlClick = () => {
     if (cityName !== "") {
-      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=9be6ef8235949b17a36522f359a10979&units=metric`;
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
       axios
         .get(apiUrl)
         .then((res) => {
@@ -64,9 +65,9 @@ const Home = () => {
           } else if (res.data.weather[0].main == "Thunderstorm") {
             imagePath = thunder;
             bgImagePath = thunderBg;
-          } else if (res.data.weather[0].main == "haze") {
+          } else if (res.data.weather[0].main == "Haze") {
             imagePath = haze;
-            bgImagePath = haze;
+            bgImagePath = hazeBg;
           }
           console.log(res.data);
           setData({
