@@ -69,7 +69,7 @@ const Home = () => {
             imagePath = haze;
             bgImagePath = hazeBg;
           }
-          console.log(res.data);
+
           setData({
             ...data,
             celcius: res.data.main.temp,
@@ -89,8 +89,6 @@ const Home = () => {
           } else {
             setError("");
           }
-
-          console.log(err);
         });
     }
   };
